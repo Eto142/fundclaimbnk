@@ -95,7 +95,7 @@
                         <div class="action-icon">
                             <i class="bi bi-cash-stack"></i>
                         </div>
-                        <span>Deposit</span>
+                        <span>Dashboard</span>
                     </button>
                     <button class="action-btn fade-in enhanced-card" id="transferBtn">
                         <div class="action-icon">
