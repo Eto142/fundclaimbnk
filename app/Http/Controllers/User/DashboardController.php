@@ -29,6 +29,23 @@ public function index()
     return view('user.home');
 }
 
+
+public function TransferPage()
+{
+    
+  
+    return view('user.transfer');
+}
+
+
+
+public function ProfilePage()
+{
+    
+  
+    return view('user.profile');
+}
+
 /**
  * Get the BTC price in USD (i.e. 1 BTC = X USD).  
  * You can use CoinGecko, CoinAPI, etc.

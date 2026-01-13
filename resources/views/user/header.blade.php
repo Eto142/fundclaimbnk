@@ -1083,15 +1083,15 @@
 
             <!-- Navigation Menu -->
             <nav class="nav-menu">
-                <a href="#" class="nav-item active">
+                <a href="{{ route('home') }}" class="nav-item active">
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span>
                 </a>
-                 <a href="#" class="nav-item">
+                 <a href="{{ route('transfers') }}" class="nav-item">
                     <i class="bi bi-arrow-left-right"></i>
                     <span>Transfers</span>
                 </a>
-                <a href="#" class="nav-item">
+                <a href="{{ route('profile') }}" class="nav-item">
                     <i class="bi bi-wallet2"></i>
                     <span>Profile</span>
                 </a>
@@ -1126,7 +1126,7 @@
             <div class="sidebar-footer">
                 <button class="sidebar-btn" id="newAccountBtn">
                     <i class="bi bi-plus-circle"></i>
-                    <span>New Account</span>
+                    <span>Active Account</span>
                 </button>
                 <button class="sidebar-btn secondary" id="helpCenterBtn">
                     <i class="bi bi-question-circle"></i>

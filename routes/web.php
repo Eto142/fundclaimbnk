@@ -61,7 +61,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
-Route::get('/gas-billing', [DashboardController::class, 'gasBilling'])->name('gas-billing');
+Route::get('/transfers', [DashboardController::class, 'TransferPage'])->name('transfers');
+Route::get('/profile', [DashboardController::class, 'ProfilePage'])->name('profile');
 
 
 
