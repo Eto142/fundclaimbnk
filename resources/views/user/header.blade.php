@@ -1118,7 +1118,7 @@
                 </a> --}}
                 <a href="#" class="nav-item">
                     <i class="bi bi-gear"></i>
-                    <span>Settings</span>
+                    <span>Logout</span>
                 </a>
             </nav>
 

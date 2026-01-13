@@ -13,7 +13,7 @@
                 <div class="balance-header">
                     <div>
                         <div class="balance-label">Total Balance</div>
-                        <div class="balance-amount" id="totalBalance">$0.00</div>
+                        <div class="balance-amount">$0.00</div>
                         {{-- <div class="balance-trend positive">
                             <i class="bi bi-arrow-up"></i>
                             +2.5% this month
