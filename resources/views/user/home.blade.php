@@ -1187,7 +1187,7 @@
         <main class="main-content">
             <!-- Welcome Section -->
             <div class="welcome-section fade-in">
-                <h1>Welcome back, <span class="text-primary">John</span>!</h1>
+                <h1>Welcome back, <span class="text-primary">{{ Auth::user()->name }}</span>!</h1>
                 <p id="currentDate">Here's your financial overview for today</p>
             </div>
 
@@ -1196,22 +1196,22 @@
                 <div class="balance-header">
                     <div>
                         <div class="balance-label">Total Balance</div>
-                        <div class="balance-amount" id="totalBalance">$124,580.75</div>
-                        <div class="balance-trend positive">
+                        <div class="balance-amount" id="totalBalance">$0.00</div>
+                        {{-- <div class="balance-trend positive">
                             <i class="bi bi-arrow-up"></i>
                             +2.5% this month
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="balance-icon">
                         <i class="bi bi-wallet2"></i>
                     </div>
                 </div>
                 <div style="position: relative; z-index: 1;">
-                    <small>Account: •••• 4832</small>
+                    <small>ID Number: {{ Auth::user()->id_number }}</small>
                 </div>
             </div>
 
-            <!-- Stats Grid -->
+            {{-- <!-- Stats Grid -->
             <div class="stats-grid">
                 <div class="stat-card income fade-in enhanced-card">
                     <div class="stat-header">
@@ -1268,7 +1268,7 @@
                         <div class="progress-fill" style="width: 85%"></div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Quick Actions -->
             <div class="quick-actions">
