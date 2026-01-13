@@ -18,86 +18,38 @@ class LoginController extends Controller
     /**
      * Handle login request.
      */
-    // public function login(Request $request)
-    // {
-    //     $request->validate([
-    //         'email'    => 'required|email',
-    //         'password' => 'required|string',
-    //     ]);
-
-    //     if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
-    //         $user = Auth::user();
-
-    //         // ✅ Check access code verification
-    //         if (!$user->verified) {
-    //             return redirect()->route('access.code')
-    //                 ->with('warning', 'Please verify your access code first.');
-    //         }
-
-    //         return redirect()->route('home')->with('success', 'Welcome back, ' . $user->name . '!');
-    //     }
-
-    //     return back()->withErrors([
-    //         'email' => 'Invalid credentials. Please try again.',
-    //     ])->withInput($request->only('email'));
-    // }
-
-
-
-
-
-    public function login(Request $request)
+public function login(Request $request)
 {
+    // ✅ Validate inputs
     $request->validate([
-        'email'    => 'required|email',
+        'email'    => 'required|string',
         'password' => 'required|string',
     ]);
 
-    if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
-        $user = Auth::user();
+    $loginValue = $request->email;
 
-        // // 🔒 Suspend check
-        // if ($user->suspended == 1) {
-        //     Auth::logout();
-        //     return redirect()->route('login')->withErrors([
-        //         'email' => 'Were very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below',
-        //     ]);
-        // }
+    // ✅ Detect whether email or account ID
+    $field = filter_var($loginValue, FILTER_VALIDATE_EMAIL)
+        ? 'email'
+        : 'id_number';
 
+    // ✅ Attempt login
+    if (Auth::attempt([
+        $field    => $loginValue,
+        'password'=> $request->password
+    ])) {
 
-        //  // 🔒 Suspend check
-        // if ($user->suspended == 1) {
-        //     Auth::logout();
-        //     return redirect()->route('login')->withErrors([
-        //         'email' => 'We’re very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below.',
-        //     ]);
-        // }
+        $request->session()->regenerate();
 
-        
-        // 🔒 Suspend check
-        if ($user->suspended == 1) {
-            Auth::logout();
-            return redirect()->route('login')->withErrors([
-                'email' => 'We’re very sorry to inform you that your access link has been suspended. Kindly contact support for more help using the email address below:<br><a href="mailto:support@getnowpay.online" style="color:#0d6efd; text-decoration:underline;">support@getnowpay.online</a>',
-            ]);
-        }
-
-
-
-
-        // ✅ Access code verification check
-        if (!$user->verified) {
-            return redirect()->route('access.code')
-                ->with('warning', 'Please verify your access code first.');
-        }
-
-        return redirect()->route('home')->with('success', 'Welcome back, ' . $user->name . '!');
+       return redirect()->route('home')
+    ->with('success', 'Login successful');
     }
 
     return back()->withErrors([
-        'email' => 'Invalid credentials. Please try again.',
-    ])->withInput($request->only('email'));
+        'email' => 'Invalid email/account ID or password.',
+    ]);
 }
+
 
 
 

@@ -4,7 +4,11 @@ use App\Http\Controllers\Auth\AccessCodeController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -51,3 +55,14 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 
 
 
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
+
+Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
+Route::get('/gas-billing', [DashboardController::class, 'gasBilling'])->name('gas-billing');
+
+
+
+});

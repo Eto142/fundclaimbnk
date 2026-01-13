@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Login | Fundclaim Bank</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
 
   <style>
     * {
@@ -109,6 +114,30 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+ .input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding-right: 44px; /* space for the eye */
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
+
+.eye-icon:hover {
+  color: #000;
+}
+
   </style>
 </head>
 <body>
@@ -117,49 +146,97 @@
     <h1>Welcome Back</h1>
     <p>Login to your Fundclaim Bank account</p>
 
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter Email" required>
-      </div>
+<form id="loginForm" method="POST" action="{{ route('login') }}">
+  @csrf
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="••••••••" required>
-      </div>
+  <!-- Email / Account ID -->
+  <div class="form-group">
+    <label for="email">Email or Account ID</label>
+    <input
+      type="text"
+      id="email"
+      name="email"
+      value="{{ old('email') }}"
+      placeholder="Email or Account ID"
+      required
+    >
+    @error('email')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-      <button type="submit">Login</button>
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <div class="input-with-icon">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="••••••••"
+        required
+      >
+      <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('password', this)"></i>
+    </div>
+    @error('password')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-      <div id="formMessage" class="message"></div>
-    </form>
+  <button type="submit">Login</button>
+
+  <!-- General error if login fails -->
+  @if($errors->has('email'))
+    <div class="error">{{ $errors->first('email') }}</div>
+  @endif
+
+  <!-- Optional success message -->
+  @if(session('success'))
+    <div class="success">{{ session('success') }}</div>
+  @endif
+</form>
+
+
+<!-- Optional CSS for Errors -->
+<style>
+.error {
+  color: #b00020;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.success {
+  color: #155724;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+</style>
+
 
     <div class="footer-links">
       Don’t have an account?
       <a href="{{ route('show.register') }}">Create one</a>
     </div>
   </div>
+ <script>
+function togglePassword(inputId, icon) {
+  const input = document.getElementById(inputId);
 
-  <script>
-    document.getElementById("loginForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  }
+}
 
-      const name = document.getElementById("name").value.trim();
-      const password = document.getElementById("password").value;
-      const message = document.getElementById("formMessage");
-
-      if (!name || !password) {
-        message.innerHTML = "<span class='error'>Please enter your name and password.</span>";
-        return;
-      }
-
-      // Simulated login check
-      message.innerHTML = "<span class='success'>Login successful! Redirecting...</span>";
-
-      setTimeout(() => {
-        window.location.href = "../dashboard/index.html";
-      }, 1500);
-    });
-  </script>
+</script>
+ 
 
 </body>
 </html>

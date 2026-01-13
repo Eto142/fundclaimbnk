@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <title>Create Account | Fundclaim Bank</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+/>
+
 
   <style>
     * {
@@ -109,6 +114,32 @@
       text-decoration: none;
       font-weight: 600;
     }
+
+
+.input-with-icon {
+  position: relative;
+}
+
+.input-with-icon input {
+  width: 100%;
+  padding-right: 44px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #777;
+}
+
+.eye-icon:hover {
+  color: #000;
+}
+
+
   </style>
 </head>
 <body>
@@ -116,39 +147,126 @@
   <div class="register-card">
     <h1>Create Account</h1>
     <p>Open your Fundclaim Bank account in seconds</p>
+<form method="POST" action="{{ route('register.submit') }}">
+  @csrf
 
-    <form id="registerForm">
-      <div class="form-group">
-        <label for="name">Full Name</label>
-        <input type="text" id="name" required placeholder="Enter Full Name">
-      </div>
+  <div class="form-group">
+    <label for="name">Full Name</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      value="{{ old('name') }}"
+      required
+      placeholder="Enter Full Name"
+    >
+    @error('name')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" required placeholder="Enter Email">
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required minlength="6" placeholder="••••••••">
-      </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      value="{{ old('email') }}"
+      required
+      placeholder="Enter Email"
+    >
+    @error('email')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-      <div class="form-group">
-        <label for="country">Country</label>
-        <select id="country" required>
-          <option value="">Select country</option>
-          <option>United States</option>
-          <option>United Kingdom</option>
-          <option>Canada</option>
-          <option>South Africa</option>
-          <option>Australia</option>
-          <option>Other</option>
-        </select>
-      </div>
+  <div class="form-group">
+    <label for="country">Country</label>
+    <input
+      type="text"
+      id="country"
+      name="country"
+      value="{{ old('country') }}"
+      required
+      placeholder="Enter Country"
+    >
+    @error('country')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-      <button type="submit">Register</button>
+  <!-- Password -->
+  <div class="form-group">
+    <label for="password">Password</label>
+    <div class="input-with-icon">
+      <input
+        type="password"
+        id="password"
+        name="password"
+        required
+        minlength="6"
+        placeholder="••••••••"
+      >
+      <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('password', this)"></i>
+    </div>
+    @error('password')
+      <span class="error">{{ $message }}</span>
+    @enderror
+  </div>
 
-      <div id="formMessage" class="message"></div>
-    </form>
+  <!-- Confirm Password -->
+  <div class="form-group">
+    <label for="password_confirmation">Confirm Password</label>
+    <div class="input-with-icon">
+      <input
+        type="password"
+        id="password_confirmation"
+        name="password_confirmation"
+        required
+        minlength="6"
+        placeholder="••••••••"
+      >
+      <i class="fa-solid fa-eye eye-icon" onclick="togglePassword('password_confirmation', this)"></i>
+    </div>
+  </div>
+
+  <button type="submit">Register</button>
+
+  <!-- Success / General Message -->
+  @if(session('success'))
+    <div class="success">{{ session('success') }}</div>
+  @endif
+
+  <!-- Optional form message for errors -->
+  @if($errors->any())
+    <div class="error">
+      Please fix the errors above and try again.
+    </div>
+  @endif
+</form>
+
+
+
+<!-- Optional CSS for Errors -->
+<style>
+.error {
+  color: #b00020;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.success {
+  color: #155724;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+}
+</style>
+
+
+
+
 
     <div class="footer-link">
       Already have an account? <a href="{{ route('login') }}">Login</a>
@@ -156,27 +274,21 @@
   </div>
 
   <script>
-    document.getElementById("registerForm").addEventListener("submit", function(e) {
-      e.preventDefault();
+function togglePassword(inputId, icon) {
+  const input = document.getElementById(inputId);
 
-      const name = document.getElementById("name").value.trim();
-      const password = document.getElementById("password").value;
-      const country = document.getElementById("country").value;
-      const message = document.getElementById("formMessage");
+  if (input.type === "password") {
+    input.type = "text";
+    icon.classList.remove("fa-eye");
+    icon.classList.add("fa-eye-slash");
+  } else {
+    input.type = "password";
+    icon.classList.remove("fa-eye-slash");
+    icon.classList.add("fa-eye");
+  }
+}
+</script>
 
-      if (!name || !password || !country) {
-        message.innerHTML = "<span class='error'>Please fill in all fields.</span>";
-        return;
-      }
-
-      // Simulated success response
-      message.innerHTML = "<span class='success'>Registration successful! Redirecting...</span>";
-
-      setTimeout(() => {
-        window.location.href = "../login/index.html";
-      }, 1500);
-    });
-  </script>
 
 </body>
 </html>
