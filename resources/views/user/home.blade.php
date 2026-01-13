@@ -1290,13 +1290,13 @@
                         <div class="action-icon">
                             <i class="bi bi-credit-card"></i>
                         </div>
-                        <span>Pay Bills</span>
+                        <span>Profile</span>
                     </button>
                     <button class="action-btn fade-in enhanced-card" id="investBtn">
                         <div class="action-icon">
                             <i class="bi bi-graph-up"></i>
                         </div>
-                        <span>Invest</span>
+                        <span>Logout</span>
                     </button>
                 </div>
             </div>
@@ -1320,7 +1320,7 @@
                         </div>
                     </div>
 
-                    <!-- Recent Transactions -->
+                    {{-- <!-- Recent Transactions -->
                     <div class="transactions-card fade-in enhanced-card" style="margin-top: 1.5rem;">
                         <div class="card-header">
                             <h3>Recent Transactions</h3>
@@ -1381,7 +1381,7 @@
                             <div class="progress-bar">
                                 <div class="progress-fill" style="width: 25%; background: var(--success);"></div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             </div>
