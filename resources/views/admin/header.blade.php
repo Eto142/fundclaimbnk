@@ -337,7 +337,7 @@
             
             <a href="#" class="nav-link">
                 <i class="fas fa-piggy-bank"></i>
-                <span> Total Conversion</span>
+                <span> Total Transfers</span>
             </a>
             
 
@@ -357,16 +357,16 @@
                 <span>Loans</span>
             </a>
              --}}
-            <a href="{{ route('admin.send.email') }}" class="nav-link">
+            {{-- <a href="{{ route('admin.send.email') }}" class="nav-link">
                 <i class="fas fa-credit-card"></i>
                 <span>Send Mail</span>
-            </a>
-            
+            </a> --}}
+{{--             
               <a href="{{ route('admin.transactions') }}" class="nav-link">
                 <i class="fas fa-exchange-alt"></i>
                 <span>Total Transactions</span>
                
-            </a>
+            </a> --}}
         
             
             {{-- <a href="#" class="nav-link">

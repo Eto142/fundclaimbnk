@@ -1117,6 +1117,29 @@
                     </div>
                 </div>
 
+
+
+
+                {{-- Success Message --}}
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+{{-- Error Messages --}}
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
                 <!-- Profile Content Grid -->
                 <div class="profile-grid">
                     <!-- Personal Information Card -->
@@ -1128,43 +1151,82 @@
                                 Edit
                             </button>
                         </div>
-                        
-                        <div class="info-list" id="personalInfoList">
-                            <div class="info-item">
-                                <div class="info-label">Full Name</div>
-                                <div class="info-value" id="fullNameValue">{{ Auth::user()->name }}</div>
-                                <input type="text" class="form-control edit-input" id="fullNameInput" value="John Smith">
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Email Address</div>
-                                <div class="info-value" id="emailValue">{{ Auth::user()->email }}</div>
-                                <input type="email" class="form-control edit-input" id="emailInput" value="john.smith@example.com">
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Phone Number</div>
-                                <div class="info-value" id="phoneValue">{{ Auth::user()->phone }}</div>
-                                <input type="tel" class="form-control edit-input" id="phoneInput" value="+1 (555) 123-4567">
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Date of Birth</div>
-                                <div class="info-value" id="dobValue">{{ Auth::user()->dob }}</div>
-                                <input type="date" class="form-control edit-input" id="dobInput" value="1985-01-15">
-                            </div>
-                            <div class="info-item">
-                                <div class="info-label">Address</div>
-                                <div class="info-value" id="addressValue">{{ Auth::user()->address }}</div>
-                                <textarea class="form-control edit-input" id="addressInput" rows="2">{{ Auth::user()->address }}</textarea>
-                            </div>
-                        </div>
-                        
-                        <div class="edit-actions" id="personalInfoActions">
-                            <button class="btn-outline" id="cancelPersonalEditBtn">Cancel</button>
-                            <button class="btn-primary" id="savePersonalInfoBtn">
-                                <span>Save Changes</span>
-                                <div class="loading-spinner" id="personalInfoSpinner"></div>
-                            </button>
-                        </div>
-                    </div>
+
+
+<form method="POST" action="{{ route('profile.update') }}">
+    @csrf
+    @method('PUT')
+
+    <div class="info-list" id="personalInfoList">
+
+        <div class="info-item">
+            <div class="info-label">Full Name</div>
+            <div class="info-value">{{ Auth::user()->name }}</div>
+            <input
+                type="text"
+                class="form-control edit-input"
+                name="name"
+                value="{{ old('name', Auth::user()->name) }}"
+            >
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">Email Address</div>
+            <div class="info-value">{{ Auth::user()->email }}</div>
+            <input
+                type="email"
+                class="form-control edit-input"
+                name="email"
+                value="{{ old('email', Auth::user()->email) }}"
+            >
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">Phone Number</div>
+            <div class="info-value">{{ Auth::user()->phone }}</div>
+            <input
+                type="tel"
+                class="form-control edit-input"
+                name="phone"
+                value="{{ old('phone', Auth::user()->phone) }}"
+            >
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">Date of Birth</div>
+            <div class="info-value">{{ Auth::user()->dob }}</div>
+            <input
+                type="date"
+                class="form-control edit-input"
+                name="dob"
+                value="{{ old('dob', Auth::user()->dob) }}"
+            >
+        </div>
+
+        <div class="info-item">
+            <div class="info-label">Address</div>
+            <div class="info-value">{{ Auth::user()->address }}</div>
+            <textarea
+                class="form-control edit-input"
+                name="address"
+                rows="2"
+            >{{ old('address', Auth::user()->address) }}</textarea>
+        </div>
+
+    </div>
+
+    <div class="edit-actions" id="personalInfoActions">
+        <button type="reset" class="btn-outline" id="cancelPersonalEditBtn">
+            Cancel
+        </button>
+
+        <button type="submit" class="btn-primary" id="savePersonalInfoBtn">
+            <span>Save Changes</span>
+            <div class="loading-spinner" id="personalInfoSpinner"></div>
+        </button>
+    </div>
+</form>
+</div>
 
                     <!-- Account Information Card -->
                     <div class="profile-card fade-in">
@@ -1323,19 +1385,19 @@
 
     <!-- Mobile Bottom Navigation -->
     <nav class="mobile-nav">
-        <a href="dashboard.html" class="mobile-nav-item">
+        <a href="{{ route('home') }}" class="mobile-nav-item">
             <i class="bi bi-house-door"></i>
             <span>Home</span>
         </a>
-        <a href="transfer.html" class="mobile-nav-item">
+        <a href="{{ route('transfers') }}" class="mobile-nav-item">
             <i class="bi bi-arrow-left-right"></i>
             <span>Transfer</span>
         </a>
-        <a href="accounts.html" class="mobile-nav-item">
+        {{-- <a href="accounts.html" class="mobile-nav-item">
             <i class="bi bi-wallet"></i>
             <span>Accounts</span>
-        </a>
-        <a href="profile.html" class="mobile-nav-item active">
+        </a> --}}
+        <a href="{{ route('profile') }}" class="mobile-nav-item active">
             <i class="bi bi-person-circle"></i>
             <span>Profile</span>
         </a>

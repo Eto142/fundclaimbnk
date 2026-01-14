@@ -13,7 +13,7 @@
                 <div class="balance-header">
                     <div>
                         <div class="balance-label">Total Balance</div>
-                        <div class="balance-amount">$0.00</div>
+                        <div class="balance-amount">${{ $balance_total }}</div>
                         {{-- <div class="balance-trend positive">
                             <i class="bi bi-arrow-up"></i>
                             +2.5% this month
@@ -88,35 +88,41 @@
             </div> --}}
 
             <!-- Quick Actions -->
-            <div class="quick-actions">
-                <h3 class="section-title">Quick Actions</h3>
-                <div class="actions-grid">
-                    <button class="action-btn fade-in enhanced-card" id="depositBtn">
-                        <div class="action-icon">
-                            <i class="bi bi-cash-stack"></i>
-                        </div>
-                        <span>Dashboard</span>
-                    </button>
-                    <button class="action-btn fade-in enhanced-card" id="transferBtn">
-                        <div class="action-icon">
-                            <i class="bi bi-arrow-left-right"></i>
-                        </div>
-                        <span>Transfer</span>
-                    </button>
-                    <button class="action-btn fade-in enhanced-card" id="payBillsBtn">
-                        <div class="action-icon">
-                            <i class="bi bi-credit-card"></i>
-                        </div>
-                        <span>Profile</span>
-                    </button>
-                    <button class="action-btn fade-in enhanced-card" id="investBtn">
-                        <div class="action-icon">
-                            <i class="bi bi-graph-up"></i>
-                        </div>
-                        <span>Logout</span>
-                    </button>
-                </div>
+          <div class="quick-actions">
+    <h3 class="section-title">Quick Actions</h3>
+    <div class="actions-grid">
+
+        <a href="{{ route('home') }}" class="action-btn fade-in enhanced-card">
+            <div class="action-icon">
+                <i class="bi bi-cash-stack"></i>
             </div>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="{{ route('transfers') }}" class="action-btn fade-in enhanced-card">
+            <div class="action-icon">
+                <i class="bi bi-arrow-left-right"></i>
+            </div>
+            <span>Transfer</span>
+        </a>
+
+        <a href="{{ route('profile') }}" class="action-btn fade-in enhanced-card">
+            <div class="action-icon">
+                <i class="bi bi-credit-card"></i>
+            </div>
+            <span>Profile</span>
+        </a>
+
+        <a href="/logout" class="action-btn fade-in enhanced-card">
+            <div class="action-icon">
+                <i class="bi bi-graph-up"></i>
+            </div>
+            <span>Logout</span>
+        </a>
+
+    </div>
+</div>
+
 
             <!-- Content Grid -->
             <div class="content-grid">

@@ -75,10 +75,10 @@
                 <div class="card stat-card bg-info bg-opacity-10 border-info h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div>
+                            {{-- <div>
                                 <div class="value fs-3 fw-bold">{{ $totalWithdrawalCount }}</div>
                                 <div class="label text-muted">Total Withdrawals</div>
-                            </div>
+                            </div> --}}
                             <div class="bg-info bg-opacity-25 p-3 rounded">
                                 <i class="fas fa-exchange-alt text-info fs-4"></i>
                             </div>
@@ -92,10 +92,10 @@
                 <div class="card stat-card bg-secondary bg-opacity-10 border-secondary h-100">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div>
+                            {{-- <div>
                                 <div class="value fs-3 fw-bold">{{ $totalConversionCount }}</div>
                                 <div class="label text-muted">Total Conversion</div>
-                            </div>
+                            </div> --}}
                             <div class="bg-secondary bg-opacity-25 p-3 rounded">
                                 <i class="fas fa-university text-secondary fs-4"></i>
                             </div>

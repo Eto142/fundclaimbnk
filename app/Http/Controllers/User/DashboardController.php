@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
+use App\Models\Balance;
 use App\Models\Conversion;
 use App\Models\Deposit;
 use App\Models\Escrow;
@@ -22,12 +23,25 @@ class DashboardController extends Controller
 
 
 
+
+
+
 public function index()
 {
+    $user = auth()->user();
+
+    // Totals as before
+    $balance_total = Balance::where('user_id', $user->id)->sum('amount');
     
-  
-    return view('user.home');
+    return view('user.home', [
+        'user' => $user,
+      
+        'balance_total' => $balance_total,
+       
+    ]);
 }
+
+
 
 
 public function TransferPage()

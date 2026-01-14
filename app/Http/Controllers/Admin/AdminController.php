@@ -21,10 +21,8 @@ class AdminController extends Controller
           // User Statistics
         $newUsersCount = User::where('created_at', '>=', Carbon::now()->subDays(7))->count();
         $totalUsersCount = User::count();
-        $totalConversionCount = Conversion::count();
-        // $totalPaymentinfoCount = Paymentinfo::count();
-        // $totalPaymentproofCount = PaymentProof::count();
-        $totalWithdrawalCount = Withdrawal::count();
+       
+        // $totalWithdrawalCount = Withdrawal::count();
         //  $totalTransactionCount = Transaction::count();
 
          // Recent Activity
@@ -34,9 +32,8 @@ class AdminController extends Controller
         return view('admin.dashboard', compact(
             'newUsersCount',
             'totalUsersCount',
-            'totalConversionCount',
-            
-            'totalWithdrawalCount',
+           
+            // 'totalWithdrawalCount',
            
             'recentUsers',
         ));

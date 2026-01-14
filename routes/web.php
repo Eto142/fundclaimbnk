@@ -5,8 +5,12 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\User\TransferController;
 use App\Http\Controllers\User\DashboardController;
 use Illuminate\Support\Facades\Route;
+
+
 
 
 
@@ -63,6 +67,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
 Route::get('/transfers', [DashboardController::class, 'TransferPage'])->name('transfers');
 Route::get('/profile', [DashboardController::class, 'ProfilePage'])->name('profile');
+
+Route::post('/transfer', [TransferController::class, 'store'])
+    ->name('transfer.store');
+
+    Route::put('/profile/update', [ProfileController::class, 'update'])
+    ->name('profile.update');
 
 
 

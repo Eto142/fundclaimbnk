@@ -18,11 +18,11 @@
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Tax Code
             </button> --}}
 
-             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateConversionModal">
-                <i class="fas fa-file-invoice-dollar me-1"></i> Update Crypto Deposit Amount
+             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#updateBalanceModal">
+                <i class="fas fa-file-invoice-dollar me-1"></i> Update Balance
             </button>
 
-            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateWithdrawalStatusModal">
+            {{-- <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#updateWithdrawalStatusModal">
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Conversion Payment Button
             </button>
 
@@ -36,7 +36,7 @@
 
             <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateFiatBalanceModal">
                 <i class="fas fa-file-invoice-dollar me-1"></i> Update Fiat Balance
-            </button>
+            </button> --}}
         </div>
     </div>
 
@@ -111,9 +111,7 @@
                         <a href="tel:+{{ $userProfile->phone }}" class="btn btn-sm btn-outline-info">
                             <i class="fas fa-phone me-1"></i> Call
                         </a>
-                        <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#updateTaxCodeModal">
-                            <i class="fas fa-file-invoice-dollar me-1"></i> Tax Code
-                        </button>
+                      
                     </div>
                     
                     <hr>
@@ -123,76 +121,14 @@
     <div class="col-12 col-md-6">
         <div class="card bg-success bg-opacity-10 border-success h-100">
             <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Fiat Amount</h6>
-                <p class="card-text fw-bold fs-5 mb-0">${{ $fiat_amount }}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6">
-        <div class="card bg-success bg-opacity-10 border-success h-100">
-            <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Crypto Deposit Amount</h6>
-                <p class="card-text fw-bold fs-5 mb-0">${{ $deposit_amount }}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6">
-        <div class="card bg-success bg-opacity-10 border-success h-100">
-            <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Total Conversion Amount</h6>
-                <p class="card-text fw-bold fs-5 mb-0">${{ $conversion_amount }}</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6">
-        <div class="card bg-success bg-opacity-10 border-success h-100">
-            <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Conversion Payment Button Status</h6>
-                <p class="card-text fw-bold fs-5 mb-0">
-                    @if($userProfile->withdrawal_status == 1)
-                        Activated <i class="fas fa-check-circle text-success"></i>
-                    @else
-                        Deactivated <i class="fas fa-times-circle text-danger"></i>
-                    @endif
-                </p>
+                <h6 class="card-title text-success mb-1">Balance Amount</h6>
+                <p class="card-text fw-bold fs-5 mb-0">${{ $balance_amount }}</p>
             </div>
         </div>
     </div>
 
 
-    <div class="col-12 col-md-6">
-        <div class="card bg-warning bg-opacity-10 border-success h-100">
-            <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">User Suspension Status</h6>
-                <p class="card-text fw-bold fs-5 mb-0">
-                    @if($userProfile->suspended == 1)
-                        Suspension Activated <i class="fas fa-check-circle text-success"></i>
-                    @else
-                        Deactivated <i class="fas fa-times-circle text-danger"></i>
-                    @endif
-                </p>
-            </div>
-        </div>
-    </div>
 
-
-    <div class="col-12 col-md-6">
-        <div class="card bg-primary bg-opacity-10 border-success h-100">
-            <div class="card-body p-2 text-center">
-                <h6 class="card-title text-success mb-1">Convert Button Status</h6>
-                <p class="card-text fw-bold fs-5 mb-0">
-                    @if($userProfile->conversion_status == 1)
-                        Activated <i class="fas fa-check-circle text-success"></i>
-                    @else
-                        Deactivated <i class="fas fa-times-circle text-danger"></i>
-                    @endif
-                </p>
-            </div>
-        </div>
-    </div>
 
 
 
@@ -229,42 +165,18 @@
                             <label class="form-label text-muted small">Phone Number</label>
                             <div class="fw-semibold">{{ $userProfile->phone }}</div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label text-muted small">SSN</label>
-                            <div class="fw-semibold">{{ $userProfile->ssn }}</div>
-                        </div>
-
+                       
                          <div class="col-md-6 mb-3">
-                            <label class="form-label text-muted small">Access Code</label>
-                            <div class="fw-semibold">{{ $userProfile->access_code }}</div>
+                            <label class="form-label text-muted small">Date of Birth</label>
+                            <div class="fw-semibold">{{ $userProfile->dob }}</div>
                         </div>
 
-<div class="col-md-6 mb-3">
-    <label class="form-label text-muted small">Front ID</label>
-    @if($userProfile->front_id)
-        <img src="{{ asset('storage/' . $userProfile->front_id) }}" alt="Front ID" class="img-fluid rounded">
-    @else
-        <div class="text-muted">No front ID uploaded</div>
-    @endif
-</div>
-
-<div class="col-md-6 mb-3">
-    <label class="form-label text-muted small">Back ID</label>
-    @if($userProfile->back_id)
-        <img src="{{ asset('storage/' . $userProfile->back_id) }}" alt="Back ID" class="img-fluid rounded">
-    @else
-        <div class="text-muted">No back ID uploaded</div>
-    @endif
-</div>
 
                         <div class="col-md-6 mb-3">
                             <label class="form-label text-muted small">Address</label>
                             <div class="fw-semibold">{{ $userProfile->address }}</div>
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label text-muted small">Employment</label>
-                            <div class="fw-semibold">{{ $userProfile->employment }}</div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -276,7 +188,7 @@
                         <!-- Verification Tab First -->
                         <li class="nav-item" role="presentation">
                             <button class="nav-link active px-4 py-3 fw-bold" id="verification-tab" data-bs-toggle="tab" data-bs-target="#conversions" type="button" role="tab">
-                                <i class="fas fa-shield-alt me-2"></i> Conversion
+                                <i class="fas fa-shield-alt me-2"></i> Transfers
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
@@ -292,7 +204,7 @@
                         <!-- Conversions Tab (first and active) -->
                         <div class="tab-pane fade show active" id="conversions" role="tabpanel">
                             <div class="table-responsive">
-                                <table class="table table-hover table-sm">
+                                {{-- <table class="table table-hover table-sm">
                                     <thead class="table-light">
                                         <tr>
                                             <th>Date</th>
@@ -337,14 +249,14 @@
                                             </tr>
                                         @endforelse
                                     </tbody>
-                                </table>
+                                </table> --}}
                             </div>
                         </div>
 
                         <!-- Withdrawals Tab -->
                         <div class="tab-pane fade" id="withdrawals" role="tabpanel">
                             <div class="table-responsive">
-                              <table class="table table-hover table-sm">
+                              {{-- <table class="table table-hover table-sm">
     <thead class="table-light">
         <tr>
             <th>Date</th>
@@ -402,7 +314,7 @@
             </tr>
         @endforelse
     </tbody>
-</table>
+</table> --}}
 
                             </div>
                         </div>
@@ -535,26 +447,26 @@
 
 
 
-<div class="modal fade" id="updateConversionModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="updateBalanceModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Update Crypto Deposit Amount</h5>
+                <h5 class="modal-title">Update Balance Amount</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('admin.add.deposit')}}" method="POST">
+            <form action="{{ route('admin.add.balance')}}" method="POST">
                 @csrf
                 <input type="hidden" name="id" value="{{$userProfile->id}}"/>
                 	
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label class="form-label">Deposit Amount</label>
-                        <input type="text" class="form-control" name="amount" placeholder="Enter Conversion Amount" value="">
+                        <label class="form-label">Balance Amount</label>
+                        <input type="text" class="form-control" name="amount" placeholder="Enter balance Amount" value="">
                     </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Update Deposit Amount</button>
+                    <button type="submit" class="btn btn-primary">Update Balance Amount</button>
                 </div>
             </form>
         </div>

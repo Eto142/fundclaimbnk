@@ -1006,16 +1006,38 @@
                     <p>Send money to accounts, beneficiaries, or other banks</p>
                 </div>
 
+                
+                {{-- Success Message --}}
+@if(session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+{{-- Error Messages --}}
+@if($errors->any())
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <ul class="mb-0">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+@endif
+
+
                 <!-- Transfer Steps -->
                 <div class="transfer-steps fade-in">
                     <div class="step active" id="step1">
                         <div class="step-circle">
-                            <span class="step-number">1</span>
+                            <span class="step-number"></span>
                             <i class="bi bi-check"></i>
                         </div>
                         <div class="step-label">Details</div>
                     </div>
-                    <div class="step" id="step2">
+                    {{-- <div class="step" id="step2">
                         <div class="step-circle">
                             <span class="step-number">2</span>
                             <i class="bi bi-check"></i>
@@ -1028,7 +1050,7 @@
                             <i class="bi bi-check"></i>
                         </div>
                         <div class="step-label">Confirm</div>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <!-- Transfer Form -->
@@ -1038,85 +1060,115 @@
                         <p>Enter the details for your transfer</p>
                     </div>
 
-                    <form id="transferForm">
-                        <!-- From Account -->
-                        <div class="form-group">
-                            <label class="form-label" for="fromAccount">From Account</label>
-                            <select class="form-control form-select" id="fromAccount" required>
-                                <option value="">Select Account</option>
-                                <option value="savings-4832">Savings Account (•••• 4832) - $8,642.00</option>
-                                <option value="checking-5916">Checking Account (•••• 5916) - $3,808.75</option>
-                                <option value="investment-7421">Investment Account (•••• 7421) - $15,320.50</option>
-                            </select>
-                        </div>
+                   <form  method="POST" action="{{ route('transfer.store') }}">
+    @csrf
+    <!-- Account Name -->
+    <div class="form-group">
+        <label class="form-label" for="accountName">Account Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="accountName"
+            name="account_name"
+            placeholder="Enter account holder name"
+            required
+        >
+    </div>
 
-                        <!-- To Account -->
-                        <div class="form-group">
-                            <label class="form-label" for="toAccount">To Account / Beneficiary</label>
-                            <select class="form-control form-select" id="toAccount" required>
-                                <option value="">Select Recipient</option>
-                                <optgroup label="My Accounts">
-                                    <option value="checking-5916">Checking Account (•••• 5916)</option>
-                                    <option value="investment-7421">Investment Account (•••• 7421)</option>
-                                </optgroup>
-                                <optgroup label="Saved Beneficiaries">
-                                    <option value="john-smith">John Smith (•••• 7283)</option>
-                                    <option value="emily-johnson">Emily Johnson (•••• 9145)</option>
-                                    <option value="acme-corp">ACME Corporation (•••• 6321)</option>
-                                </optgroup>
-                                <option value="new">+ Add New Beneficiary</option>
-                            </select>
-                        </div>
+    <!-- Account Number -->
+    <div class="form-group">
+        <label class="form-label" for="accountNumber">Account Number</label>
+        <input
+            type="text"
+            class="form-control"
+            id="accountNumber"
+            name="account_number"
+            placeholder="Enter account number"
+            required
+        >
+    </div>
 
-                        <!-- Amount -->
-                        <div class="form-group">
-                            <label class="form-label" for="amount">Amount</label>
-                            <div class="amount-input">
-                                <span class="currency-symbol">$</span>
-                                <input type="number" 
-                                       class="form-control" 
-                                       id="amount" 
-                                       placeholder="0.00" 
-                                       min="1" 
-                                       max="10000" 
-                                       step="0.01" 
-                                       required>
-                            </div>
-                            <div class="form-note">Maximum transfer: $10,000 per transaction</div>
-                        </div>
+    <!-- Bank Name -->
+    <div class="form-group">
+        <label class="form-label" for="bankName">Bank Name</label>
+        <input
+            type="text"
+            class="form-control"
+            id="bankName"
+            name="bank_name"
+            placeholder="Enter bank name"
+            required
+        >
+    </div>
 
-                        <!-- Description -->
-                        <div class="form-group">
-                            <label class="form-label" for="description">Description (Optional)</label>
-                            <input type="text" 
-                                   class="form-control" 
-                                   id="description" 
-                                   placeholder="e.g., Rent payment, Gift, etc." 
-                                   maxlength="50">
-                            <div class="form-note">Max 50 characters</div>
-                        </div>
+    <!-- Bank Country -->
+    <div class="form-group">
+        <label class="form-label" for="bankCountry">Bank Country</label>
+        <input
+            type="text"
+            class="form-control"
+            id="bankCountry"
+            name="bank_country"
+            placeholder="Enter bank country"
+            required
+        >
+    </div>
 
-                        <!-- Transfer Date -->
-                        <div class="form-group">
-                            <label class="form-label" for="transferDate">Transfer Date</label>
-                            <select class="form-control form-select" id="transferDate" required>
-                                <option value="now">Transfer Now</option>
-                                <option value="tomorrow">Tomorrow</option>
-                                <option value="specific">Select Date</option>
-                            </select>
-                        </div>
+    <!-- Bank Address -->
+    <div class="form-group">
+        <label class="form-label" for="bankAddress">Bank Address</label>
+        <input
+            type="text"
+            class="form-control"
+            id="bankAddress"
+            name="bank_address"
+            placeholder="Enter bank address"
+            required
+        >
+    </div>
 
-                        <!-- Transfer Actions -->
-                        <div class="transfer-actions">
-                            <button type="button" class="btn-outline" id="cancelBtn">
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn-primary" id="continueBtn">
-                                <i class="bi bi-arrow-right"></i>
-                                Continue
-                            </button>
-                        </div>
-                    </form>
+    <!-- Amount -->
+    <div class="form-group">
+        <label class="form-label" for="amount">Amount</label>
+        <div class="amount-input">
+            <span class="currency-symbol">$</span>
+            <input
+                type="number"
+                class="form-control"
+                id="amount"
+                name="amount"
+                placeholder="0.00"
+                min="1"
+                step="0.01"
+                required
+            >
+        </div>
+    </div>
+
+    <!-- Description -->
+    <div class="form-group">
+        <label class="form-label" for="description">Description</label>
+        <input
+            type="text"
+            class="form-control"
+            id="description"
+            name="description"
+            placeholder="Optional description"
+            maxlength="100"
+        >
+    </div>
+
+    <!-- Actions -->
+    <div class="transfer-actions">
+        <button type="button" class="btn-outline" id="cancelBtn">
+            Cancel
+        </button>
+        <button type="submit" class="btn-primary">
+            Continue
+        </button>
+    </div>
+</form>
+
                 </div>
 
                 {{-- <!-- Recent Transfers -->
