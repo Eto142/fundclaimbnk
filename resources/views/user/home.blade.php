@@ -8,26 +8,6 @@
                 <p id="currentDate">Here's your financial overview for today</p>
             </div>
 
-            {{-- Success Message --}}
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
-{{-- Error Messages --}}
-@if($errors->any())
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <ul class="mb-0">
-            @foreach($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-@endif
-
             <!-- Balance Card -->
             <div class="balance-card fade-in">
                 <div class="balance-header">
@@ -148,121 +128,20 @@
             <div class="content-grid">
                 <!-- Left Column -->
                 <div>
-                    <!-- Quick Transfer -->
+                    {{-- <!-- Quick Transfer -->
                     <div class="quick-transfer fade-in enhanced-card">
                         <div class="card-header">
                             <h3>Quick Transfer</h3>
                         </div>
-                        
-                   <form  method="POST" action="{{ route('transfer.store') }}">
-    @csrf
-    <!-- Account Name -->
-    <div class="form-group">
-        <label class="form-label" for="accountName">Account Name</label>
-        <input
-            type="text"
-            class="form-control"
-            id="accountName"
-            name="account_name"
-            placeholder="Enter account holder name"
-            required
-        >
-    </div>
-
-    <!-- Account Number -->
-    <div class="form-group">
-        <label class="form-label" for="accountNumber">Account Number</label>
-        <input
-            type="text"
-            class="form-control"
-            id="accountNumber"
-            name="account_number"
-            placeholder="Enter account number"
-            required
-        >
-    </div>
-
-    <!-- Bank Name -->
-    <div class="form-group">
-        <label class="form-label" for="bankName">Bank Name</label>
-        <input
-            type="text"
-            class="form-control"
-            id="bankName"
-            name="bank_name"
-            placeholder="Enter bank name"
-            required
-        >
-    </div>
-
-    <!-- Bank Country -->
-    <div class="form-group">
-        <label class="form-label" for="bankCountry">Bank Country</label>
-        <input
-            type="text"
-            class="form-control"
-            id="bankCountry"
-            name="bank_country"
-            placeholder="Enter bank country"
-            required
-        >
-    </div>
-
-    <!-- Bank Address -->
-    <div class="form-group">
-        <label class="form-label" for="bankAddress">Bank Address</label>
-        <input
-            type="text"
-            class="form-control"
-            id="bankAddress"
-            name="bank_address"
-            placeholder="Enter bank address"
-            required
-        >
-    </div>
-
-    <!-- Amount -->
-    <div class="form-group">
-        <label class="form-label" for="amount">Amount</label>
-        <div class="amount-input">
-            <span class="currency-symbol">$</span>
-            <input
-                type="number"
-                class="form-control"
-                id="amount"
-                name="amount"
-                placeholder="0.00"
-                min="1"
-                step="0.01"
-                required
-            >
-        </div>
-    </div>
-
-    <!-- Description -->
-    <div class="form-group">
-        <label class="form-label" for="description">Description</label>
-        <input
-            type="text"
-            class="form-control"
-            id="description"
-            name="description"
-            placeholder="Optional description"
-            maxlength="100"
-        >
-    </div>
-
-    <!-- Actions -->
-    <div class="transfer-actions">
-        <button type="button" class="btn-outline" id="cancelBtn">
-            Cancel
-        </button>
-        <button type="submit" class="btn-primary">
-            Continue
-        </button>
-    </div>
-</form>
-                    </div>
+                        <div class="transfer-form">
+                            <input type="text" placeholder="Recipient Account Number" id="recipientAccount">
+                            <input type="text" placeholder="Amount" id="transferAmount">
+                            <button class="sidebar-btn w-100" id="sendMoneyBtn">
+                                <i class="bi bi-send"></i>
+                                <span>Send Money</span>
+                            </button>
+                        </div>
+                    </div> --}}
 
                     {{-- <!-- Recent Transactions -->
                     <div class="transactions-card fade-in enhanced-card" style="margin-top: 1.5rem;">
