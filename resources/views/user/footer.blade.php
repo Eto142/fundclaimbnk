@@ -8,7 +8,7 @@
                 <i class="bi bi-cash-stack"></i>
                 <span>Deposit</span>
             </a> --}}
-            <a href="{{ route('transfers') }}" class="mobile-nav-item" id="mobileTransfer">
+            <a href="{{ route('transfer-options') }}" class="mobile-nav-item" id="mobileTransfer">
                 <i class="bi bi-arrow-left-right"></i>
                 <span>Transfer</span>
             </a>

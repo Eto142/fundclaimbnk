@@ -99,7 +99,7 @@
             <span>Dashboard</span>
         </a>
 
-        <a href="{{ route('transfers') }}" class="action-btn fade-in enhanced-card">
+        <a href="{{ route('transfer-options') }}" class="action-btn fade-in enhanced-card">
             <div class="action-icon">
                 <i class="bi bi-arrow-left-right"></i>
             </div>

@@ -1087,7 +1087,7 @@
                     <i class="bi bi-speedometer2"></i>
                     <span>Dashboard</span>
                 </a>
-                 <a href="{{ route('transfers') }}" class="nav-item">
+                 <a href="{{ route('transfer-options') }}" class="nav-item">
                     <i class="bi bi-arrow-left-right"></i>
                     <span>Transfers</span>
                 </a>

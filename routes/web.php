@@ -65,8 +65,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('home');
 
 Route::get('/payment-history', [DashboardController::class, 'PaymentHistory'])->name('payment.history');
-Route::get('/transfers', [DashboardController::class, 'TransferPage'])->name('transfers');
+Route::get('/transfer-options', [TransferController::class, 'TransferOptions'])->name('transfer-options');
 Route::get('/profile', [DashboardController::class, 'ProfilePage'])->name('profile');
+Route::get('/international-transfer', [TransferController::class, 'InternationalTransfer'])->name('international.transfer');
+Route::get('/domestic-transfer', [TransferController::class, 'DomesticTransfer'])->name('domestic.transfer');
+
 
 Route::post('/transfer', [TransferController::class, 'store'])
     ->name('transfer.store');

@@ -1002,7 +1002,7 @@
             <div class="transfer-container">
                 <!-- Page Header -->
                 <div class="page-header fade-in">
-                    <h1>Transfer Funds</h1>
+                    <h1>International Transfer </h1>
                     <p>Send money to accounts, beneficiaries, or other banks</p>
                 </div>
 
@@ -1140,6 +1140,24 @@
                 placeholder="0.00"
                 min="1"
                 step="0.01"
+                required
+            >
+        </div>
+    </div>
+
+
+     <!-- Swift Code -->
+    <div class="form-group">
+        <label class="form-label" for="amount">Swift Code</label>
+        <div class="amount-input">
+        
+            <input
+                type="text"
+                class="form-control"
+                id="amount"
+                name="swift_code"
+                placeholder="Enter Swift Code"
+        
                 required
             >
         </div>
@@ -1690,3 +1708,5 @@
     </script>
 </body>
 </html>
+
+ @include('user.footer')

@@ -15,6 +15,7 @@ class Transfer extends Model
         'bank_address',
         'amount',
         'description',
+        'swift_code',
         'status',
     ];
 

@@ -87,6 +87,7 @@ public function store(Request $request)
         'bank_address'   => 'required|string|max:255',
         'amount'         => 'required|numeric|min:1',
         'description'    => 'nullable|string|max:100',
+         'swift_code'    => 'nullable|string|max:100',
     ]);
 
     $user = Auth::user();
@@ -112,10 +113,40 @@ public function store(Request $request)
         'bank_address'   => $request->bank_address,
         'amount'         => $request->amount,
         'description'    => $request->description,
+         'swift_code'    => $request->swift_code,
         'status'         => 0, // default status
     ]);
 
-    return redirect()->back()->with('success', 'Transfer submitted successfully.');
+    return view('user.transfer-info');
 }
+
+
+
+
+public function InternationalTransfer()
+{
+    
+  
+    return view('user.international-transfer');
+}
+
+
+public function DomesticTransfer()
+{
+    
+  
+    return view('user.domestic-transfer');
+}
+
+
+public function TransferOptions()
+{
+    
+  
+    return view('user.transfer-options');
+}
+
+
+
 
 }

@@ -1,5 +1,5 @@
   <nav class="mobile-nav mobile-nav-enhanced">
-            <a href="#" class="mobile-nav-item active" id="mobileDashboard">
+            <a href="{{ route('home') }}" class="mobile-nav-item active" id="mobileDashboard">
                 <i class="bi bi-speedometer2"></i>
                 <span>Dashboard</span>
             </a>
@@ -7,11 +7,11 @@
                 <i class="bi bi-cash-stack"></i>
                 <span>Deposit</span>
             </a> --}}
-            <a href="{{ route('transfers') }}" class="mobile-nav-item" id="mobileTransfer">
+            <a href="{{ route('transfer-options') }}" class="mobile-nav-item" id="mobileTransfer">
                 <i class="bi bi-arrow-left-right"></i>
                 <span>Transfer</span>
             </a>
-            <a href="#" class="mobile-nav-item" id="mobileProfile">
+            <a href="{{ route('profile') }}" class="mobile-nav-item" id="mobileProfile">
                 <i class="bi bi-person"></i>
                 <span>Profile</span>
             </a>
