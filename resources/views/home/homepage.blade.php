@@ -193,10 +193,10 @@
           <div class="col-lg-4">
             <div class="info-item d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="200">
               <i class="bi bi-geo-alt flex-shrink-0"></i>
-              <div>
+              {{-- <div>
                 <h3>Address</h3>
                 <p>A108 Adam Street, New York, NY 535022</p>
-              </div>
+              </div> --}}
             </div>
             
             <div class="info-item d-flex aos-init aos-animate" data-aos="fade-up" data-aos-delay="400">
